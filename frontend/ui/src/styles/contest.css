@@ -1,0 +1,111 @@
+.contests-wrapper{
+  margin-top: 5rem;
+}
+
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem ;
+  margin: 2rem ;
+  justify-content: center;
+}
+
+.card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  width: 300px;
+  height: 200px;
+  box-sizing: border-box;
+  text-decoration: none;
+  color: black;
+}
+
+
+
+.card p {
+  margin: 8px 0;
+}
+
+.card .active {
+  background-color: green;
+  font-size: var(--normal-font-size);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-left: 8px;
+}
+
+/* Table styles */
+table {
+  width: 95%;
+  border-collapse: collapse;
+  margin: 2rem;
+}
+
+table, th, td {
+  border: 1px solid #ddd;
+}
+
+th, td {
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  background-color: #f4f4f4;
+}
+
+.heading{
+  margin: 2rem;
+  text-align: center;
+  color: rgba(39, 38, 38, 0.749);
+}
+.table-container{
+  display: flex;
+  justify-content: center;
+}
+
+.contest-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+ 
+}
+
+.heading-wrapper {
+  flex-grow: 1;
+}
+
+.heading {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.add-contest {
+  display: flex;
+  align-items: center;
+  background-color: #d9edef;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.add-contest a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #000;
+}
+
+.add-contest i {
+  margin-right: 5px;
+}
+
+.add-contest .para {
+  font-size: 16px;
+}

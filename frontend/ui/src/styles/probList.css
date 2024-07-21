@@ -1,0 +1,128 @@
+.problem-list-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  /* justify-content: center; */
+  gap: 2.5rem;
+  padding: 20px;  
+}
+
+.prob-list-heading{
+  font-size: var(--h3-font-size);
+  color:var(--title-color-dark) ;
+  font-weight: var(--font-medium);
+  text-align: start;
+  
+}
+
+link{
+  text-decoration: none;
+  color: var(--title-color-dark);
+}
+
+.table {
+  li {
+    border-radius: 3px;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+  }
+  .table-header {
+    background-color: #d9edef;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .table-row {
+    background-color: #f7f7f7;
+    box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
+  }
+  .col{
+    display: flex;
+    align-items: center;
+  }
+  .col-1 {
+    flex-basis: 10%;
+  }
+  .col-2 {
+    flex-basis: 40%;
+  }
+  .col-3 {
+    flex-basis: 25%;
+  }
+  .col-4 {
+    flex-basis: 25%;
+  }
+}
+
+.prob-list-topbar{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 15px 30px;
+  gap: 3rem;
+
+}
+
+.problist-autosuggest-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  /* margin: 0 auto; */
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px 40px 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.search-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+  font-size: 1.2em;
+  pointer-events: none; 
+}
+
+.pagination{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+
+.add-prob {
+  display: flex;
+  align-items: center;
+  background-color: #d9edef;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.add-prob a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #000;
+}
+
+.add-prob i {
+  margin-right: 5px;
+}
+
+.add-prob .para {
+  font-size: 16px;
+}

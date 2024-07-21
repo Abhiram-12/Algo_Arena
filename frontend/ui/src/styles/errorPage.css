@@ -1,0 +1,22 @@
+.error-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    margin-top: 2.5rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+.error-img{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.to-home{
+    background-color: #7979b1;
+    color: rgb(255, 255, 255);
+    padding: 10px;
+    border-radius: 10px;
+    text-decoration: none;
+}

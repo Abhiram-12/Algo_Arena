@@ -1,0 +1,73 @@
+.home{
+    width: 100vw;
+    margin-top: 15vh;
+}
+.info{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.topics-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 3rem;
+    margin: 1vw  ;
+    padding: 2rem ;
+
+}
+.sub-topic{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.topic{
+    width: 250px;
+    height:200px;
+    padding: 1rem;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    border: 2px solid #d9d9d9;
+}
+
+.topic-name{
+    font-size: var(--h2-font-size);
+    font-weight: var(--font-semi-bold);
+    font-family: var(--body-font);
+    text-decoration: none;
+    color: var(--text-color);
+}
+.topic-0{
+    background-image: url('../assets/arrayImg3.png') ;
+    background-position: center;
+    background-size: cover;
+}
+.topic-1{
+    background-image: url('../assets/linkedlist_img.gif') ;
+    background-size: cover;
+    opacity: 0.5;
+}
+.topic-2{
+    background-image: url('../assets/stack_img.jpeg') ;
+    background-size: cover;
+}
+.topic-3{
+    background-image: url('../assets/queue_img.jpeg') ;
+    background-size: cover;
+}
+.topic-4{
+    background-image: url('../assets/tree_img2.gif') ;
+    background-size: cover;
+    opacity: 0.5;
+}
+.topic-5{
+    background-image: url('../assets/graph_img3.webp') ;
+    background-size: cover;
+    opacity: 0.5;
+}
