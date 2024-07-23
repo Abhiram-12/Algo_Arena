@@ -48,7 +48,7 @@ const adminVerification=async (req,res,next)=>{
             });
         }
         else{
-            const admin= await Admin.findById(data.id)
+            const admin= await Admin.findOne({user_id:data.id});
             if(!admin){ 
                 return res.json({
                     status:false,

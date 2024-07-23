@@ -52,7 +52,9 @@ const executeCpp = (filepath, inputPath) => {
 };
 
 const executeJava = (filepath, inputPath) => {
+    console.log(filepath);
     const fileName = path.basename(filepath, '.java');
+    console.log(fileName);
     const outputPath = path.dirname(filepath);
 
     console.log(`Compiling Java file: ${filepath}`); // Debugging line
@@ -61,6 +63,7 @@ const executeJava = (filepath, inputPath) => {
         exec(`javac ${filepath}`, (compileError, compileStdout, compileStderr) => {
             if (compileError) {
                 console.error(`Compilation error: ${compileStderr}`);
+                deleteFiles([filepath]);
                 return reject(new Error(`Compilation error: ${compileStderr}`));
             }
 
@@ -68,14 +71,16 @@ const executeJava = (filepath, inputPath) => {
 
             exec(`cd ${outputPath} && java ${fileName} < ${inputPath}`, (runError, runStdout, runStderr) => {
                 if (runError) {
+                    deleteFiles([outputPath]);
                     console.error(`Execution error: ${runStderr}`);
                     return reject(new Error(`Execution error: ${runStderr}`));
                 }
 
                 if (runStderr) {
+
                     console.warn(`Runtime warnings: ${runStderr}`);
                 }
-
+                deleteFiles([outputPath]);
                 console.log(`Execution output: ${runStdout.trim()}`);
                 resolve(runStdout.trim());
             });

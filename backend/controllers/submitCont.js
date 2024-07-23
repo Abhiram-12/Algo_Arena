@@ -49,10 +49,18 @@ module.exports.submit = async (req, res) => {
         const testCases = problem.testcases;
         const results = [];
         let passedAllTests = true;
-        const filepath = generateFile(lang, code);
-        const filesToDelete = [filepath];
+        let filepath ;
+        let filesToDelete=[];
+        if(lang!='java'){
+            filepath = generateFile(lang, code);
+            filesToDelete.push(filepath);
+        }
+              
 
         for (let i = 0; i < testCases.length; i++) {
+            if(lang=='java'){
+                filepath =generateFile(lang, code);
+            }
             const testCase = testCases[i];
             const inputPath = generateInputFile(testCase.input);
             const expectedOutput = testCase.output.trim();
@@ -64,6 +72,7 @@ module.exports.submit = async (req, res) => {
                 console.log(lang);
                 if (lang == "java") {
                     actualOutput = await executeJava(filepath, inputPath);
+                    deleteFiles([filepath]);
                 }
                 if (lang == "cpp") {
                     actualOutput = await executeCpp(filepath, inputPath);
@@ -71,8 +80,10 @@ module.exports.submit = async (req, res) => {
                 else {
                     actualOutput = await executePython(filepath, inputPath);
                 }
+                console.log(actualOutput,"    ",expectedOutput);
+
+                deleteFiles([inputPath]);
                 const passed = actualOutput === expectedOutput;
-                // deleteFiles([inputPath]);
                 results.push({
                     input: testCase.input,
                     expectedOutput,
@@ -84,8 +95,8 @@ module.exports.submit = async (req, res) => {
                     passedAllTests = false;
                 }
             } catch (execError) {
-                console.log("hello thats me",execError);
-                // deleteFiles([inputPath]);
+                console.log(execError);
+                deleteFiles([inputPath]);
                 results.push({
                     input: testCase.input,
                     expectedOutput,
@@ -96,8 +107,6 @@ module.exports.submit = async (req, res) => {
                 passedAllTests = false;
             }
         }
-
-        // deleteFiles(filesToDelete);
         // Create a new submission
         const submission = new Submission({
             user_id: user_id,
@@ -119,8 +128,8 @@ module.exports.submit = async (req, res) => {
             );
             console.log("User stats updated");
         }
-
-
+        deleteFiles(filesToDelete);
+        
         res.send({
             message: `Data submitted for ID: ${id}`,
             results: results,

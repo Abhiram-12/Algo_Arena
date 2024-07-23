@@ -6,9 +6,13 @@ const fs = require('fs');
 
 const deleteFiles = (files) => {
     files.forEach(file => {
-        fs.unlink(file, (err) => {
-            if (err) console.error(`Error deleting file ${file}: ${err}`);
-        });
+        if (typeof file === 'string') {
+            fs.unlink(file, (err) => {
+                if (err) {
+                    console.error(`Error deleting file: ${file}`, err);
+                }
+            });
+        }
     });
 };
 
@@ -24,7 +28,6 @@ module.exports.run= async (req,res)=>{
         let output;
         if(lang==="cpp"){
             output=await executeCpp(filepath,inputpath);
-            console.log(output);
         }
         else if(lang==="py"){
             output =await executePython(filepath,inputpath);

@@ -12,7 +12,11 @@ const generateFile=(lang,code)=>{
         // Extract the class name using a regular expression
         const classNameMatch = code.match(/public\s+class\s+(\w+)/);
         if (!classNameMatch) {
-            return (new Error('Class name not found in the Java code.'));
+            const unq_id = uuid();
+            const filePath = path.join(codeDir, `${unq_id}.java`);
+            fs.writeFileSync(filePath, code, 'utf8');
+            return filePath;
+            // return (new Error('Class name not found in the Java code.'));
         }
 
         const className = classNameMatch[1];

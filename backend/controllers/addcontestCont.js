@@ -15,6 +15,10 @@ module.exports.addContest= async (req,res)=>{
             return res.status(400).send("Please enter all required data")
         }
 
+        if(problem_ids.length===0){
+            return res.status(400).send("Please select problems");
+        }
+
         const author= await getUserid(token);
         
         const contests = await Contest.find();
@@ -45,7 +49,10 @@ module.exports.addContest= async (req,res)=>{
     }
     catch(error){
         console.error('Error adding Contest:',error);
-        res.status(500).json({ error: error});
+        res.status(500).json({ 
+            error: error,
+            message: 'Contest successfully added',
+        });
     }
 
 }

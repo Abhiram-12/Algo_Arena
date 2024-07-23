@@ -66,6 +66,7 @@ module.exports.signup= async (req,res)=>{
         //send token
         res.status(200).cookie("token",token,options).json({
             message:"You have succesfully registered",
+            username:name,
             success:true,
             token,
         })
