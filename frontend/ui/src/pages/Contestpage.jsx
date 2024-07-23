@@ -102,9 +102,9 @@ const ContestPage = () => {
     }
   }
 
-  // Set an interval to update the leaderboard every 10 minutes
+  // Set an interval to update the leaderboard every 5 minutes
   useEffect(() => {
-    const intervalId = setInterval(fetchLeaderboard, 60000); // Update every 10 minutes
+    const intervalId = setInterval(fetchLeaderboard, 300000); // Update every 5 minutes
     return () => clearInterval(intervalId);
   }, []);
 
