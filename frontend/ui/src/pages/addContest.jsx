@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import Autosuggest from 'react-autosuggest';
 import '../styles/addContest.css'
+import { ToastContainer, toast } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const AddContestForm = () => {
@@ -14,6 +17,10 @@ const AddContestForm = () => {
     const [problemQuery, setProblemQuery] = useState('');
     const [suggestions, setSuggestions] = useState([]);
     const [selectedProblems, setSelectedProblems] = useState([]);
+    const [msg,setMsg]=useState('');
+    const navigate = useNavigate();
+  const handleError = (err) => toast.error(err, { position: "top-right", autoClose: 3000})
+  const handleSuccess = (msg) => toast.success(msg, { position: "top-right", autoClose: 3000 })
 
     const startDateObj = new Date(startDate);
     const endDateObj = new Date(endDate);
@@ -66,10 +73,16 @@ const AddContestForm = () => {
             author
         };
         try {
-            await axios.post('http://localhost:8080/contests/addcontest', contestData, { withCredentials: true });
+            const response =await axios.post('http://localhost:8080/contests/addcontest', contestData, { withCredentials: true });
             // Handle success (e.g., show a success message, clear form)
+            setMsg(response.data.message);
+            handleSuccess(response.data.message);
+            setTimeout(() => navigate('/contests'), 3000);
+
         } catch (error) {
-            console.error('Error creating contest:', error);
+            console.error('Error creating contest:', error.response.data);
+            setMsg(error.response.data);
+            handleError(error.response.data);
         }
     };
 
@@ -132,7 +145,9 @@ const AddContestForm = () => {
                         </li>
                     ))}
                 </ul>
-
+                { msg&&(
+                    <div className="">Message:{msg}</div>
+                )}
                 <button type="submit">Create Contest</button>
             </form>
         </div>

@@ -1,7 +1,7 @@
 .login-wrapper{
   width:70%;
   /* height:60vh; */
-  margin-top: 10rem;
+  margin-top: 7rem;
   margin-left: auto;
   margin-right: auto;
   display: flex;
@@ -112,3 +112,7 @@
 }
 
 
+.toLogin{
+  color: initial; 
+
+}

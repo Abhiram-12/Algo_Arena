@@ -12,7 +12,7 @@
 }
 
 .card {
-  background-color: #fff;
+  background-color: #ffffff;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -23,7 +23,10 @@
   text-decoration: none;
   color: black;
 }
-
+.card-heading{
+  display: flex;
+  justify-content: space-around;
+}
 
 
 .card p {
@@ -108,4 +111,7 @@ th {
 
 .add-contest .para {
   font-size: 16px;
+}
+.active-contest{
+  background-color: rgb(176, 255, 176);
 }

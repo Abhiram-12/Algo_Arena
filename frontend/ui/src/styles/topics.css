@@ -47,6 +47,7 @@
     background-image: url('../assets/arrayImg3.png') ;
     background-position: center;
     background-size: cover;
+    opacity: 0.8;
 }
 .topic-1{
     background-image: url('../assets/linkedlist_img.gif') ;
@@ -54,12 +55,16 @@
     opacity: 0.5;
 }
 .topic-2{
-    background-image: url('../assets/stack_img.jpeg') ;
+    background-image: url('../assets/stackImg3.png') ;
     background-size: cover;
+    background-position: center;
+    opacity: 0.8;
+    
 }
 .topic-3{
     background-image: url('../assets/queue_img.jpeg') ;
     background-size: cover;
+    background-position: center;
 }
 .topic-4{
     background-image: url('../assets/tree_img2.gif') ;
@@ -67,7 +72,7 @@
     opacity: 0.5;
 }
 .topic-5{
-    background-image: url('../assets/graph_img3.webp') ;
+    background-image: url('../assets/graph_img4.gif') ;
     background-size: cover;
     opacity: 0.5;
 }

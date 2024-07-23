@@ -7,7 +7,7 @@ const Topics = () => {
   return (
     <div className="home">
       <h1 className='heading'>Practice topic wise problems </h1>
-      <div className='info'>Enhance your skills, expand your knowledge and prepare for technical interviews.</div>
+      {/* <div className='info'>Enhance your skills, expand your knowledge and prepare for technical interviews.</div> */}
       <div className="topics-container">
 
         <div className="sub-topic">

@@ -10,7 +10,7 @@ const ProblemList = () => {
   const [problemQuery, setProblemQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [problemsPerPage] = useState(8);
+  const [problemsPerPage] = useState(5);
 
   const fetchSuggestions = async ({ value }) => {
     try {

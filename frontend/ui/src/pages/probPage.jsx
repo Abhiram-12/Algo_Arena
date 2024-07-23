@@ -71,6 +71,7 @@ const ProblemPage = () => {
 
   const handleRun = async (e) => {
     try {
+      setRunresp("Running...");
       handleSectionToggle("output");
       const response = await axios.post(
         "http://localhost:8080/run",
@@ -130,7 +131,8 @@ const ProblemPage = () => {
 
   const handleSubmit = async (e) => {
     try {
-      handleSectionToggle("verdict")
+      handleSectionToggle("verdict");
+      setSubmitresp([]);
       const response = await axios.post(
         `http://localhost:8080/problems/${id}/submit`,
         { lang: lang, code: code },

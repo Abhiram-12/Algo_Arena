@@ -17,7 +17,7 @@ const Contests = () => {
     let intervalId;
     const fetchData = async () => {
       try {
-        const contestResponse = await axios.get('http://localhost:8080/contests',{ withCredentials: true });
+        const contestResponse = await axios.get('http://localhost:8080/contests', { withCredentials: true });
         const myContestResponse = await axios.get('http://localhost:8080/contests/mycontests', { withCredentials: true });
 
         const contests = contestResponse.data.reverse();
@@ -31,7 +31,7 @@ const Contests = () => {
         const pastContests = contests.filter((contest) =>
           moment(contest.end_time).isBefore(now)
         );
-
+        // ongoingContests.reverse();
         setOngoing(ongoingContests);
         setPast(pastContests);
         setMycontests(myContests);
@@ -90,26 +90,33 @@ const Contests = () => {
   return (
     <div className="contests-wrapper">
       <div className="contest-header">
-      <div className="heading-wrapper">
-        <h2 className="heading">Ongoing Contests</h2>
-      </div>
-      {isAdmin && (
-        <div className="add-contest">
-          <Link to={'/addcontest'}>
-            <i className='bx bx-pencil bx-sm'></i>
-            <span className='para'>Add a contest</span>
-          </Link>
+        <div className="heading-wrapper">
+          <h2 className="heading">Ongoing Contests</h2>
         </div>
-      )}
-    </div>
+        {isAdmin && (
+          <div className="add-contest">
+            <Link to={'/addcontest'}>
+              <i className='bx bx-pencil bx-sm'></i>
+              <span className='para'>Add a contest</span>
+            </Link>
+          </div>
+        )}
+      </div>
       <div className="card-container">
         {ongoing.map((contest, index) => (
+          
           <Link
             to={`/contests/${contest._id}`}
             key={index}
             className="card"
-          >
+
+          ><div className="card-heading">
             <h3>{contest.title}</h3>
+            {(timeLeft[index].status=="ends in")&&(
+              <span className="active">Active</span>
+            )
+            }
+            </div>
             <p>Start Time: {moment(contest.start_time).format("LLL")}</p>
             <p>End Time: {moment(contest.end_time).format("LLL")}</p>
             <p>
@@ -172,7 +179,14 @@ const Contests = () => {
               <tbody>
                 {mycontests.map((contest, index) => (
                   <tr key={index}>
-                    <td>{contest.title}</td>
+                    <td>
+                      <Link
+                        to={`/contests/${contest._id}`}
+                        key={index}
+                        className=""
+                      >
+                        {contest.title}
+                      </Link></td>
                     <td>{moment(contest.start_time).format("LLL")}</td>
                     <td>{moment(contest.end_time).format("LLL")}</td>
                   </tr>

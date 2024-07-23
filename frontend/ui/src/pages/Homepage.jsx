@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/home.css';
 import { NavLink } from 'react-router-dom'
-import topics2 from '../assets/topics2.jpg';
+import topics2 from '../assets/topics3.png';
 import contestImg from '../assets/contestImg1.jpeg'
 import compilerImg from '../assets/compiler.png'
 import algo1 from '../assets/algo1.jpg'

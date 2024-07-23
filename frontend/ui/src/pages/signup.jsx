@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState ,useContext} from 'react'
 import '../styles/signup.css'
 import user_icon from '../assets/user_icon.png'
 import email_icon from '../assets/email_icon.png'
@@ -8,12 +8,15 @@ import { ToastContainer, toast } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 import signup_img from '../assets/signupImg.png'
+import { AuthContext } from "../contexts/AuthContext"
 
 const signup = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [msg, setMsg] = useState('');
+  const { signup } = useContext(AuthContext);
+  
 
   const handleError = (err) => toast.error(err, { position: "top-right" })
   const handleSuccess = (msg) => toast.success(msg, { position: "top-right" })
@@ -24,17 +27,20 @@ const signup = () => {
     try {
       const response = await axios.post("http://localhost:8080/signup", { "name": name, "email": email, "password": password }, { withCredentials: true });
       console.log("singup response ", response);
-      const { success, message } = response.data;
+      const { success, message,username } = response.data;
       if (success) {
+        signup(username);
         setMsg(message);
         handleSuccess(message);
+        setTimeout(() => navigate('/'), 5000);
       } else {
         setMsg(message);
         handleError(message);
       }
     } catch (error) {
+      setMsg(message);
       console.log(error);
-      // handleError(data.message);
+       handleError(data.message);
     }
     setEmail('');
     setName('');
@@ -95,7 +101,7 @@ const signup = () => {
               <div className="btn">
                 <button className='signup-submit' type='submit'>Sign Up</button>
               </div>
-
+              {msg&&(<div className="">Message:{msg}</div>)}
             </div>
           </form>
         </div>

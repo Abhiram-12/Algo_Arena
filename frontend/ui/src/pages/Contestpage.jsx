@@ -1,15 +1,18 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams,Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import '../styles/contestpage.css';
 
 const ContestPage = () => {
   const { contestId } = useParams();
-  const [title,setTitle]=useState('');
+  const [title, setTitle] = useState('');
   const [questions, setQuestions] = useState([]);
   const [leaderboard, setLeaderboard] = useState([]);
   const [error, setError] = useState('');
   const [startTime, setStartTime] = useState(null);
+  const [register, setRegister] = useState('Register');
+  const [solvedProbs, setSolvedprobs] = useState([]);
+
 
   // Initial data fetch on component mount
   useEffect(() => {
@@ -33,13 +36,13 @@ const ContestPage = () => {
   // Function to fetch contest details
   const fetchContestDetails = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/contests/${contestId}`,{ withCredentials: true });
+      const response = await axios.get(`http://localhost:8080/contests/${contestId}`, { withCredentials: true });
       const data = response.data;
       setTitle(data.title);
 
       if (!data.problem_ids.length) {
         setError('The contest has not started yet.');
-        setStartTime(data.start_time); 
+        setStartTime(data.start_time);
       } else {
         setQuestions(data.problem_ids);
         fetchQuestionDetails(data.problem_ids);
@@ -56,7 +59,7 @@ const ContestPage = () => {
     try {
       const questionDetails = await Promise.all(
         problemIds.map(async (id) => {
-          const response = await axios.get(`http://localhost:8080/problems/${id}`,{ withCredentials: true });
+          const response = await axios.get(`http://localhost:8080/problems/${id}`, { withCredentials: true });
           return response.data;
         })
       );
@@ -70,29 +73,32 @@ const ContestPage = () => {
   // Function to fetch and update the leaderboard
   const fetchLeaderboard = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/contests/getleaderboard/${contestId}`,{ withCredentials: true });
+      const response = await axios.get(`http://localhost:8080/contests/getleaderboard/${contestId}`, { withCredentials: true });
       const leaderboardData = response.data.topPerformers;
       console.log(response);
       setLeaderboard(leaderboardData);
-      // await axios.get(`http://localhost:8080/contests/updateleaderboard/${contestId}`);      
-      
+      const info = await axios.get(`http://localhost:8080/contests/mycontests/${contestId}`, { withCredentials: true });
+      setSolvedprobs(info.data.solvedProblems);
     } catch (err) {
+      setSolvedprobs([]);
       console.error(err);
       setError('Failed to fetch leaderboard.');
     }
   };
 
+
   useEffect(() => {
     console.log(leaderboard);
   }, [leaderboard]);
 
-  const handleRegister=async ()=>{
+  const handleRegister = async () => {
     try {
-      const response= await axios.get(`http://localhost:8080/contests/register/${contestId}`,{withCredentials:true});
-      console.log('Registration successful:', response.data);
+      const response = await axios.get(`http://localhost:8080/contests/register/${contestId}`, { withCredentials: true });
+      setRegister('Registered');
+      console.log('Registration successful');
     } catch (error) {
       console.error(error);
-      setError('Failed to register for contest.',error);
+      setError('Failed to register for contest.', error);
     }
   }
 
@@ -119,7 +125,7 @@ const ContestPage = () => {
       </ul>
       <div className="note">
         <strong>Note:</strong> Only registered users can attempt the test.
-        <button className='register-btn' onClick={handleRegister}>Register Now</button>
+        <button className='register-btn' onClick={handleRegister}>{register}</button>
       </div>
       {error ? (
         <div className="error">{error}</div>
@@ -135,12 +141,15 @@ const ContestPage = () => {
                 </tr>
               </thead>
               <tbody>
-                {questions.map((q, index) => (
-                  <tr key={index}>
-                    <td><Link to={`/contests/${contestId}/problem/${q._id}`}>{q.title}</Link></td>
-                    <td>{q.difficulty}</td>
-                  </tr>
-                ))}
+                {questions.map((q, index) => {
+                  const isSolved = solvedProbs.includes(q._id);
+                  return (
+                    <tr key={index} className={isSolved ? 'solved' : ''}>
+                      <td><Link to={`/contests/${contestId}/problem/${q._id}`}>{q.title}</Link></td>
+                      <td>{q.difficulty}</td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
@@ -155,19 +164,19 @@ const ContestPage = () => {
                 </tr>
               </thead>
               <tbody>
-              {leaderboard!=undefined&&leaderboard  ? (
-                leaderboard.map((entry, index) => (
-                  <tr key={index}>
-                    <td>{index+1}</td>
-                    <td>{entry.username}</td>
-                    <td>{entry.totalPoints}</td>
-                  </tr>
-                ))):(
+                {leaderboard != undefined && leaderboard ? (
+                  leaderboard.map((entry, index) => (
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>{entry.username}</td>
+                      <td>{entry.totalPoints}</td>
+                    </tr>
+                  ))) : (
                   <tr>
                     <td colSpan="3">Leaderboard loading</td>
                   </tr>
                 )
-              }
+                }
               </tbody>
             </table>
           </div>
