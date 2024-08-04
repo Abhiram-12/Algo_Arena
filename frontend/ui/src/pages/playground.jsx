@@ -25,7 +25,7 @@ const Playground = () => {
   const handleRun = async (e) => {
     try {
       const response = await axios.post(
-        "http://localhost:8080/run",
+        `${import.meta.env.VITE_BACKEND_URL}/run`,
         { lang: lang, code: code ,input:input},
         { withCredentials: true }
       );
@@ -55,7 +55,7 @@ const Playground = () => {
       <div className="playground">
         <h1 className="playground-title">Play ground</h1>
         <PanelGroup direction="horizontal">
-          <Panel className="left-section" defaultSize={60}>
+          <Panel className="left-section" defaultSize={50}>
             <div>
               <div className="top-bar">
                 <select value={lang} onChange={handleLangChange}>
@@ -75,7 +75,7 @@ const Playground = () => {
             </div>
           </Panel>
           <PanelResizeHandle />
-          <Panel className="right-section" defaultSize={40}>
+          <Panel className="right-section" defaultSize={50}>
             <PanelGroup direction="vertical">
               <Panel className="right-top" defaultSize={40}>
                 <div className="playground-input">
@@ -93,7 +93,9 @@ const Playground = () => {
               <Panel className="right-bottom" defaultSize={60}>
                 <div className="playground-output">
                   <h3 className="playground-heading">Output</h3>                  
-                  <div className={output ? "show-output" : "output"}>{output}</div>
+                  <div className={output ? "show-output" : "output"}>                    
+                    <div className="">{output}</div>
+                    </div>
                 </div>
               </Panel>
             </PanelGroup>

@@ -14,7 +14,8 @@ const ProblemList = () => {
 
   const fetchSuggestions = async ({ value }) => {
     try {
-      const response = await axios.get('http://localhost:8080/search/prob', { params: { query: value } });
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/search/prob`, { params: { query: value } });
+      console.log(response.data)
       setSuggestions(response.data);
     } catch (error) {
       console.error('Error fetching suggestions:', error);
@@ -38,14 +39,17 @@ const ProblemList = () => {
 
 
   useEffect(() => {
-    axios.get('http://localhost:8080/problems')
+    // console.log(`${import.meta.env.VITE_BACKEND_URL}`);
+    axios.get(`${import.meta.env.VITE_BACKEND_URL}/problems`)
       .then(response => {
+        console.log(response.data);
         setProblems(response.data);
       })
       .catch(error => {
         console.error('Error fetching problems:', error);
       });
   }, []);
+  
 
   const indexOfLastProblem = currentPage * problemsPerPage;
   const indexOfFirstProblem = indexOfLastProblem - problemsPerPage;

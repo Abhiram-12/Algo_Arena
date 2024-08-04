@@ -3,8 +3,8 @@
   flex-direction: column;
   justify-content: space-around;
   margin-top: 4rem;
-  margin-bottom: 2rem;
-  gap:5rem;
+  /* margin-bottom: 2rem; */
+  /* gap:5rem; */
   /* background-color: rgb(240, 248, 255); */
   /* align-items: center; */
 
@@ -80,3 +80,42 @@
   .spl-case{
     opacity: 1;
   }
+
+
+  .spl-section{
+
+  }
+
+
+  
+.footer {
+  background-color: #c6c6ff;
+  color: var(--title-color);
+  padding: 20px;
+  text-align: center;
+  /* position: relative;
+  bottom: 0; */
+  width: 100%;
+}
+
+.footer-content-1 {
+  display: flex;
+  justify-content: space-around;
+
+}
+
+
+.footer-content-2 {
+  display: flex;
+  justify-content: center;
+
+}
+
+.footer-bottom p {
+  margin: 0;
+}
+
+
+.heart {
+  color: #6e6e6e; /* Light gray color for the heart */
+}

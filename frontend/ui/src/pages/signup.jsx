@@ -25,14 +25,14 @@ const signup = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:8080/signup", { "name": name, "email": email, "password": password }, { withCredentials: true });
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/signup`, { "name": name, "email": email, "password": password }, { withCredentials: true });
       console.log("singup response ", response);
       const { success, message,username } = response.data;
       if (success) {
         signup(username);
         setMsg(message);
         handleSuccess(message);
-        setTimeout(() => navigate('/'), 5000);
+        setTimeout(() => navigate('/'), 3000);
       } else {
         setMsg(message);
         handleError(message);

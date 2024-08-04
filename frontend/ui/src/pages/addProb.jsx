@@ -49,7 +49,7 @@ function AddProblem() {
     };
 
     try {
-      const response = await axios.post('http://localhost:8080/addprob', parsedFormData, {
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/addprob`, parsedFormData, {
         headers: {
           'Content-Type': 'application/json'
         }

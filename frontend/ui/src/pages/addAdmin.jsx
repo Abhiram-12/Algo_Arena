@@ -4,7 +4,7 @@ import Autosuggest from 'react-autosuggest';
 import '../styles/addContest.css'
 
 
-const AddContestForm = () => {
+const AddAdmin = () => {
     
     const [userQuery, setUserquery] = useState('');
     const [suggestions, setSuggestions] = useState([]);
@@ -14,7 +14,7 @@ const AddContestForm = () => {
     
     const fetchSuggestions = async ({ value }) => {
         try {
-            const response = await axios.get('http://localhost:8080/search/user', { params: { query: value } });
+            const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/search/user`, { params: { query: value } });
             setSuggestions(response.data);
         } catch (error) {
             console.error('Error fetching suggestions:', error);
@@ -44,7 +44,7 @@ const AddContestForm = () => {
             user_ids: selectedUsers.map(p => p._id),
         };
         try {
-            const response =await axios.post('http://localhost:8080/admin/addadmin', adminData, { withCredentials: true });
+            const response =await axios.post(`${import.meta.env.VITE_BACKEND_URL}/admin/addadmin`, adminData, { withCredentials: true });
             console.log(response);
             setMessage(response.data.message);
         } catch (error) {
@@ -95,4 +95,4 @@ const AddContestForm = () => {
     );
 };
 
-export default AddContestForm;
+export default AddAdmin;

@@ -5,7 +5,7 @@ import '../styles/topics.css'
 const Topics = () => {
   const topics = ['Arrays', 'Linked Lists', 'Stacks', 'Queues', 'Trees', 'Graphs'];
   return (
-    <div className="home">
+    <div className="topic-wrapper ">
       <h1 className='heading'>Practice topic wise problems </h1>
       {/* <div className='info'>Enhance your skills, expand your knowledge and prepare for technical interviews.</div> */}
       <div className="topics-container">

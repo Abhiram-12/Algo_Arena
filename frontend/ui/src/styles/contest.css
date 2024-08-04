@@ -115,3 +115,9 @@ th {
 .active-contest{
   background-color: rgb(176, 255, 176);
 }
+
+.view-more{
+  text-align: end;
+  text-decoration: none;
+  
+}

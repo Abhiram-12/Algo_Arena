@@ -26,7 +26,7 @@ const ContestProbpage = () => {
   useEffect(() => {
     const fetchProblemDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/problems/${problemId}`);
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/problems/${problemId}`);
         setProblem(response.data);
       } catch (error) {
         console.error('Error fetching problem details:', error);
@@ -39,7 +39,7 @@ const ContestProbpage = () => {
   useEffect(() => {
     const fetchContestDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/contests/${contestId}`);
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/contests/${contestId}`);
         const data = response.data;
         setEndtime(data.end_time);
       } catch (err) {
@@ -90,7 +90,7 @@ const ContestProbpage = () => {
     try {
       handleSectionToggle("output");
       const response = await axios.post(
-        "http://localhost:8080/run",
+        `${import.meta.env.VITE_BACKEND_URL}/run`,
         { lang: lang, code: code, input: problem.sampleTestcases[0].input },
         { withCredentials: true }
       );
@@ -125,7 +125,7 @@ const ContestProbpage = () => {
     try {
       handleSectionToggle("verdict")
       const response = await axios.post(
-        `http://localhost:8080/problems/${problemId}/submit`,
+        `${import.meta.env.VITE_BACKEND_URL}/problems/${problemId}/submit`,
         { lang: lang, code: code },
         { withCredentials: true }
       );

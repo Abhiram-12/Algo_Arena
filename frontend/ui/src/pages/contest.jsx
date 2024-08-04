@@ -8,6 +8,7 @@ import { AuthContext } from "../contexts/AuthContext";
 const Contests = () => {
   const [ongoing, setOngoing] = useState([]);
   const [past, setPast] = useState([]);
+  const [showPast,setShowPast]=useState([]);
   const [mycontests, setMycontests] = useState([]);
   const [timeLeft, setTimeLeft] = useState({});
   const { isAdmin } = useContext(AuthContext);
@@ -17,8 +18,8 @@ const Contests = () => {
     let intervalId;
     const fetchData = async () => {
       try {
-        const contestResponse = await axios.get('http://localhost:8080/contests', { withCredentials: true });
-        const myContestResponse = await axios.get('http://localhost:8080/contests/mycontests', { withCredentials: true });
+        const contestResponse = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/contests`, { withCredentials: true });
+        const myContestResponse = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/contests/mycontests`, { withCredentials: true });
 
         const contests = contestResponse.data.reverse();
         const myContests = myContestResponse.data.reverse();
@@ -34,6 +35,7 @@ const Contests = () => {
         // ongoingContests.reverse();
         setOngoing(ongoingContests);
         setPast(pastContests);
+        setShowPast(pastContests.slice(1,10));
         setMycontests(myContests);
 
         updateTimers(ongoingContests);
@@ -146,7 +148,7 @@ const Contests = () => {
               </tr>
             </thead>
             <tbody>
-              {past.map((contest, index) => (
+              {showPast.map((contest, index) => (
                 <tr key={index}>
                   <td>
                     <Link
@@ -164,6 +166,11 @@ const Contests = () => {
             </tbody>
 
           </table>
+          {/* {past.length > 10 && (
+            <div className="view-more">
+              <Link to="/past-contests">View More</Link>
+            </div>
+          )} */}
         </div>
         {mycontests.length > 0 && (
           <div className="my-contests">
@@ -177,7 +184,7 @@ const Contests = () => {
                 </tr>
               </thead>
               <tbody>
-                {mycontests.map((contest, index) => (
+                {mycontests.slice(0,10).map((contest, index) => (
                   <tr key={index}>
                     <td>
                       <Link

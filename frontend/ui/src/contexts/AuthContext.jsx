@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/check-auth', { withCredentials: true });
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/check-auth`, { withCredentials: true });
         console.log("auth response ",response);
         if (response.data.isAuthenticated) {
           setIsAuthenticated(true);

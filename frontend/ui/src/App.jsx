@@ -18,7 +18,8 @@ import AddContestForm from './pages/addContest';
 import Topicwise from './pages/topicwiseProbs';
 import ContestProbpage from './pages/contestProbpage';
 import AddAdmin from './pages/addAdmin';
-import { ToastContainer} from "react-toastify"
+import { ToastContainer} from "react-toastify";
+
 
 
 
@@ -44,8 +45,10 @@ function App() {
             <Route path='/addcontest' element={ <AddContestForm/>} />
             <Route path='/addadmin' element={ <AddAdmin/>} />
             <Route path="/contests/:contestId/problem/:problemId" element={<ContestProbpage/>} />
+            <Route path='/addadmin' element={ <AddAdmin/>}/>
             <Route path='*' element={<ErrorPage/>}/>
           </Routes>
+          
           <ToastContainer />
       </AuthProvider>
     </>

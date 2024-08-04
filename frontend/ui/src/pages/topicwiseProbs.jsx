@@ -8,7 +8,7 @@ const Topicwise = () => {
   const { topic } = useParams();
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/topics/${topic}`)
+    axios.get(`${import.meta.env.VITE_BACKEND_URL}/topics/${topic}`)
       .then(response => {
         setProblems(response.data);
       })

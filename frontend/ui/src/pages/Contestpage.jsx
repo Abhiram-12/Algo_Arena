@@ -36,7 +36,7 @@ const ContestPage = () => {
   // Function to fetch contest details
   const fetchContestDetails = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/contests/${contestId}`, { withCredentials: true });
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/contests/${contestId}`, { withCredentials: true });
       const data = response.data;
       setTitle(data.title);
 
@@ -59,7 +59,7 @@ const ContestPage = () => {
     try {
       const questionDetails = await Promise.all(
         problemIds.map(async (id) => {
-          const response = await axios.get(`http://localhost:8080/problems/${id}`, { withCredentials: true });
+          const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/problems/${id}`, { withCredentials: true });
           return response.data;
         })
       );
@@ -73,11 +73,11 @@ const ContestPage = () => {
   // Function to fetch and update the leaderboard
   const fetchLeaderboard = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/contests/getleaderboard/${contestId}`, { withCredentials: true });
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/contests/getleaderboard/${contestId}`, { withCredentials: true });
       const leaderboardData = response.data.topPerformers;
       console.log(response);
       setLeaderboard(leaderboardData);
-      const info = await axios.get(`http://localhost:8080/contests/mycontests/${contestId}`, { withCredentials: true });
+      const info = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/contests/mycontests/${contestId}`, { withCredentials: true });
       setSolvedprobs(info.data.solvedProblems);
     } catch (err) {
       setSolvedprobs([]);
@@ -93,7 +93,7 @@ const ContestPage = () => {
 
   const handleRegister = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/contests/register/${contestId}`, { withCredentials: true });
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/contests/register/${contestId}`, { withCredentials: true });
       setRegister('Registered');
       console.log('Registration successful');
     } catch (error) {

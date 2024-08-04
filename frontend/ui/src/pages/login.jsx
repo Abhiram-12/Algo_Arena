@@ -20,7 +20,7 @@ const login = () => {
     e.preventDefault();
 
     try {
-      const { data } = await axios.post("http://localhost:8080/login", { "email": email, "password": password }, { withCredentials: true });
+      const { data } = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/login`, { "email": email, "password": password }, { withCredentials: true });
 
       const { success, message,username } = data;
       if (success) {

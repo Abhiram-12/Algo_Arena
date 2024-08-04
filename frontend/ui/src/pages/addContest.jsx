@@ -19,8 +19,8 @@ const AddContestForm = () => {
     const [selectedProblems, setSelectedProblems] = useState([]);
     const [msg,setMsg]=useState('');
     const navigate = useNavigate();
-  const handleError = (err) => toast.error(err, { position: "top-right", autoClose: 3000})
-  const handleSuccess = (msg) => toast.success(msg, { position: "top-right", autoClose: 3000 })
+    const handleError = (err) => toast.error(err, { position: "top-right", autoClose: 3000})
+    const handleSuccess = (msg) => toast.success(msg, { position: "top-right", autoClose: 3000 })
 
     const startDateObj = new Date(startDate);
     const endDateObj = new Date(endDate);
@@ -36,7 +36,7 @@ const AddContestForm = () => {
 
     const fetchSuggestions = async ({ value }) => {
         try {
-            const response = await axios.get('http://localhost:8080/search/prob', { params: { query: value } });
+            const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/search/prob`, { params: { query: value } });
             // console.log('suggestion resp',response.data);
             setSuggestions(response.data);
         } catch (error) {
@@ -73,7 +73,7 @@ const AddContestForm = () => {
             author
         };
         try {
-            const response =await axios.post('http://localhost:8080/contests/addcontest', contestData, { withCredentials: true });
+            const response =await axios.post(`${import.meta.env.VITE_BACKEND_URL}/contests/addcontest`, contestData, { withCredentials: true });
             // Handle success (e.g., show a success message, clear form)
             setMsg(response.data.message);
             handleSuccess(response.data.message);

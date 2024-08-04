@@ -27,7 +27,7 @@ const ProblemPage = () => {
   useEffect(() => {
     //fetching problem details
     axios
-      .get(`http://localhost:8080/problems/${id}`)
+      .get(`${import.meta.env.VITE_BACKEND_URL}/problems/${id}`)
       .then((response) => {
         setProblem(response.data);
       })
@@ -39,7 +39,7 @@ const ProblemPage = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/submissions/${id}`, { withCredentials: true })
+      .get(`${import.meta.env.VITE_BACKEND_URL}/submissions/${id}`, { withCredentials: true })
       .then((response) => {
         console.log(response);
         setSubmissions(response.data.reverse());
@@ -74,7 +74,7 @@ const ProblemPage = () => {
       setRunresp("Running...");
       handleSectionToggle("output");
       const response = await axios.post(
-        "http://localhost:8080/run",
+        `${import.meta.env.VITE_BACKEND_URL}/run`,
         { lang: lang, code: code, input: problem.sampleTestcases[0].input },
         { withCredentials: true }
       );
@@ -134,7 +134,7 @@ const ProblemPage = () => {
       handleSectionToggle("verdict");
       setSubmitresp([]);
       const response = await axios.post(
-        `http://localhost:8080/problems/${id}/submit`,
+        `${import.meta.env.VITE_BACKEND_URL}/problems/${id}/submit`,
         { lang: lang, code: code },
         { withCredentials: true }
       );
@@ -308,7 +308,7 @@ const ProblemPage = () => {
                             </div>
                           ))
                         ) : (
-                          <div>No verdict</div>
+                          <div>verdict</div>
                         )}
                       </div>
                     )}

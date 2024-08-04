@@ -1,6 +1,6 @@
-.home{
-    width: 100vw;
-    margin-top: 15vh;
+.topic-wrapper{
+    /* width: 100vw; */
+    margin-top: 13vh;
 }
 .info{
     display: flex;
@@ -16,6 +16,7 @@
     flex-direction: row;
     gap: 3rem;
     margin: 1vw  ;
+    margin-bottom: 0;
     padding: 2rem ;
 
 }
