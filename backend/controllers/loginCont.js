@@ -9,12 +9,13 @@ module.exports.login = async (req, res) => {
     try {
         //get all details
         const { email, password } = req.body;
+        console.log("login req");
 
         //check all detials exists
         if (!(email && password)) {
             return res.status(401).send("please enter all req fields!");
         }
-
+        
         //search for user in db 
         const user = await User.findOne({ email });
         if (!user) {

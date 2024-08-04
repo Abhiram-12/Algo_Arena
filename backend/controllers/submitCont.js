@@ -49,18 +49,16 @@ module.exports.submit = async (req, res) => {
         const testCases = problem.testcases;
         const results = [];
         let passedAllTests = true;
-        let filepath ;
-        let filesToDelete=[];
-        if(lang!='java'){
-            filepath = generateFile(lang, code);
-            filesToDelete.push(filepath);
-        }
-              
+        let filepath;
+        let filesToDelete = [];
+
+        filepath = generateFile(lang, code);
+        filesToDelete.push(filepath);
 
         for (let i = 0; i < testCases.length; i++) {
-            if(lang=='java'){
-                filepath =generateFile(lang, code);
-            }
+
+            // filepath = generateFile(lang, code);
+
             const testCase = testCases[i];
             const inputPath = generateInputFile(testCase.input);
             const expectedOutput = testCase.output.trim();
@@ -70,17 +68,17 @@ module.exports.submit = async (req, res) => {
             try {
                 let actualOutput;
                 console.log(lang);
-                if (lang == "java") {
-                    actualOutput = await executeJava(filepath, inputPath);
-                    deleteFiles([filepath]);
-                }
+
                 if (lang == "cpp") {
                     actualOutput = await executeCpp(filepath, inputPath);
+                }
+                else if (lang == "java") {
+                    actualOutput = await executeJava(filepath, inputPath);
                 }
                 else {
                     actualOutput = await executePython(filepath, inputPath);
                 }
-                console.log(actualOutput,"    ",expectedOutput);
+                console.log(actualOutput, "    ", expectedOutput);
 
                 deleteFiles([inputPath]);
                 const passed = actualOutput === expectedOutput;
@@ -123,13 +121,13 @@ module.exports.submit = async (req, res) => {
         if (passedAllTests) {
             await UserStats.findOneAndUpdate(
                 { user_id: user_id },
-                { $addToSet: { problems_id_solved: problem._id } }, 
-                { upsert: true, new: true } 
+                { $addToSet: { problems_id_solved: problem._id } },
+                { upsert: true, new: true }
             );
             console.log("User stats updated");
         }
         deleteFiles(filesToDelete);
-        
+
         res.send({
             message: `Data submitted for ID: ${id}`,
             results: results,

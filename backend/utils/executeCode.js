@@ -53,53 +53,29 @@ const executeCpp = (filepath, inputPath) => {
 
 const executeJava = (filepath, inputPath) => {
     console.log(filepath);
-    const fileName = path.basename(filepath, '.java');
-    console.log(fileName);
-    const outputPath = path.dirname(filepath);
-
     console.log(`Compiling Java file: ${filepath}`); // Debugging line
 
     return new Promise((resolve, reject) => {
-        exec(`javac ${filepath}`, (compileError, compileStdout, compileStderr) => {
-            if (compileError) {
-                console.error(`Compilation error: ${compileStderr}`);
+        const runCommand = `java ${filepath} < ${inputPath}`;
+
+        exec(runCommand, (runError, runStdout, runStderr) => {
+            if (runError) {
                 deleteFiles([filepath]);
-                return reject(new Error(`Compilation error: ${compileStderr}`));
+                console.error(`Execution error: ${runStderr}`);
+                return reject(new Error(`Execution error: ${runStderr}`));
             }
 
-            console.log(`Compiled successfully: ${compileStdout}`);
-
-            exec(`cd ${outputPath} && java ${fileName} < ${inputPath}`, (runError, runStdout, runStderr) => {
-                if (runError) {
-                    deleteFiles([outputPath]);
-                    console.error(`Execution error: ${runStderr}`);
-                    return reject(new Error(`Execution error: ${runStderr}`));
-                }
-
-                if (runStderr) {
-
-                    console.warn(`Runtime warnings: ${runStderr}`);
-                }
-                deleteFiles([outputPath]);
-                console.log(`Execution output: ${runStdout.trim()}`);
-                resolve(runStdout.trim());
-            });
+            if (runStderr) {
+                console.warn(`Runtime warnings: ${runStderr}`);
+            }
+            
+            
+            console.log(`Execution output: ${runStdout.trim()}`);
+            resolve(runStdout.trim());
         });
     });
 };
 
-
-// const deleteFiles = (filePaths) => {
-//     filePaths.forEach((filePath) => {
-//         fs.unlink(filePath, (err) => {
-//             if (err) {
-//                 console.error(`Error deleting file ${filePath}:`, err);
-//             } else {
-//                 console.log(`File deleted: ${filePath}`);
-//             }
-//         });
-//     });
-// };
 
 
 const executePython = (filepath, inputPath) => {
