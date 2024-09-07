@@ -19,11 +19,8 @@ const Contests = () => {
     const fetchData = async () => {
       try {
         const contestResponse = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/contests`, { withCredentials: true });
-        const myContestResponse = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/contests/mycontests`, { withCredentials: true });
-
-        const contests = contestResponse.data.reverse();
-        const myContests = myContestResponse.data.reverse();
-
+        const contests = contestResponse.data.reverse();                
+        
         const now = moment();
 
         const ongoingContests = contests.filter((contest) =>
@@ -32,14 +29,19 @@ const Contests = () => {
         const pastContests = contests.filter((contest) =>
           moment(contest.end_time).isBefore(now)
         );
-        // ongoingContests.reverse();
+        
         setOngoing(ongoingContests);
         setPast(pastContests);
         setShowPast(pastContests.slice(1,10));
-        setMycontests(myContests);
-
         updateTimers(ongoingContests);
         intervalId = setInterval(() => updateTimers(ongoingContests), 1000);
+
+        // my contests
+        const myContestResponse = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/contests/mycontests`, { withCredentials: true });
+        const myContests = myContestResponse.data.reverse();
+        setMycontests(myContests);
+
+        
 
       } catch (error) {
         console.error("Error fetching contests data:", error);

@@ -23,7 +23,7 @@ const Newlogin = () => {
 
     try {
       const { data } = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/login`, { "email": email, "password": password }, { withCredentials: true });
-
+      console.log(data);
       const { success, message,username } = data;
       if (success) {
         console.log("hello ",username)

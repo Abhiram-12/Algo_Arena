@@ -122,14 +122,17 @@ const Navbar = () => {
             <div>Problems Solved: {userStats.problems_id_solved.length}</div>
             <div>Contests participated: {userStats.contest_stats.length}</div>
             <div className="admin-fun">
-            <button className="logout-btn" onClick={handleLogout}>
-              Log out
-            </button>
-            <div className="admin-fun-item">
-              <NavLink className=" add-admin" to="/addadmin">
-                Add Admin
-              </NavLink>
-            </div>
+              <button className="logout-btn" onClick={handleLogout}>
+                Log out
+              </button>
+              {isAdmin && (
+                <div className="admin-fun-item">
+                  <NavLink className=" add-admin" to="/addadmin">
+                    Add Admin
+                  </NavLink>
+                </div>
+              )}
+
             </div>
           </div>
         </div>

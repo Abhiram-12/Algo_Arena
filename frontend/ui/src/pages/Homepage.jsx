@@ -84,10 +84,10 @@ const HomePage = () => {
       <footer className="footer">
         <div className="footer-content-1">
           <div className="footer-links">
-            <a href="/about" className="footer-link">About Us</a>
-            <a href="/contact" className="footer-link">Contact</a>
-            <a href="/privacy-policy" className="footer-link">Privacy Policy</a>
-            <a href="/terms-of-service" className="footer-link">Terms of Service</a>
+            <a className="footer-link">About Us</a>
+            <a className="footer-link">Contact</a>
+            <a className="footer-link">Privacy Policy</a>
+            <a className="footer-link">Terms of Service</a>
           </div>
           <div className="footer-content-2">
             <p className="footer-credit">Made with <span className="heart">❤️</span> By Abhiram &copy; 2024 AlgoArena.</p>
