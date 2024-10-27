@@ -2,7 +2,7 @@
 
 AlgoArena is an online judge platform enabling users to solve coding challenges, participate in contests, and improve their problem-solving skills. Built using the MERN stack, AlgoArena provides a streamlined environment for users to write, run, and submit code, with automated verdicts.
 
-## 🌐 Live Demo
+## 🌐 Website
 [AlgoArena](https://www.algo-arena.tech) <!-- Replace with actual link if hosted -->
 
 ---
