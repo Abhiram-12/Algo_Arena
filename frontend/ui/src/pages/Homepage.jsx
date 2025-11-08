@@ -90,7 +90,7 @@ const HomePage = () => {
             <a className="footer-link">Terms of Service</a>
           </div>
           <div className="footer-content-2">
-            <p className="footer-credit">Made with <span className="heart">🖤</span> By Favad &copy; 2024 AlgoArena.</p>
+            <p className="footer-credit">Made with <span className="heart">🖤</span> By Abhiram &copy; 2024 AlgoArena.</p>
           </div>
         </div>
       </footer>
